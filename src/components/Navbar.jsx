@@ -6,8 +6,13 @@ export default class Navbar extends Component {
   render() {
     return (
       <div>
-      <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
-        <Link to="/" className="navbar-brand">Car Sooq</Link>
+      <nav className="navbar navbar-dark bg-#1c2a48 mdb-color darken-3 navbar-expand-lg">
+        <Link to="/homepage" className="nav-link">
+          <img src= {process.env.PUBLIC_URL + "./Images/CarSooqLogo.png"}
+            alt = "logo"
+            width = "7.5%"
+           />
+        </Link>
         <div className="collpase navbar-collapse">
         <ul className="navbar-nav mr-auto" >
           <li className="navbar-item" >
