@@ -10,19 +10,20 @@ import Login from "./components/Login.jsx";
 import Signup from "./components/Signup.jsx";
 import AboutUs from "./components/AboutUs.jsx";
 import Homepage from "./components/Homepage.jsx";
-import AddCar from "./components/AddCar.jsx";
+import LoginForm from "./components/LoginForm.jsx";
+import SignUpForm from "./components/SignUpForm.jsx";
 
 function App() {
   return (
 
       <Router className = "container">
         <Navbar />
-        <Route path = "/"  component = { Homepage } />
+        <Route path = "/homepage"  component = { Homepage } />
         {/* <Route path = "/inventory"  component = { RenderedCars } /> */}
         <Route path = "/aboutUs"  component = { AboutUs } />
-        <Route path = "/login"  component = { Login } />
-        <Route path = "/signup"  component = { Signup } />
-        <AddCar />
+        <Route path = "/login"  component = { LoginForm } />
+        <Route path = "/signup"  component = { SignUpForm } />
+        {/* <SignUpForm /> */}
       </Router>
     
   );
