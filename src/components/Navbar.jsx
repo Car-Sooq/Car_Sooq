@@ -10,6 +10,9 @@ export default class Navbar extends Component {
         <Link to="/" className="navbar-brand">Car Sooq</Link>
         <div className="collpase navbar-collapse">
         <ul className="navbar-nav mr-auto" >
+        <li className="navbar-item" >
+          <Link to="/AddCar" className="nav-link">Add Car</Link>
+          </li>
           <li className="navbar-item" >
           <Link to="/inventory" className="nav-link">Inventory</Link>
           </li>

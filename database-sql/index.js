@@ -1,12 +1,12 @@
 var mysql = require('mysql');
-var data = require('./data.json');
+// var data = require('./data.json');
 
 // //edit your user and password
 // //our database called stock
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "12345678",
+    password: "11111111",
     database: "stock"
 });
 
@@ -14,7 +14,7 @@ var con = mysql.createConnection({
 con.connect(function(err) {
     if (err) throw err;
     console.log("MySQL Connected!!!");
-    var Cars = "CREATE TABLE IF NOT EXISTS cars (brand VARCHAR(20), year YEAR, price INT, colour VARCHAR(20), description VARCHAR(250), image TEXT, id INT PRIMARY KEY )";
+    var Cars = "CREATE TABLE IF NOT EXISTS car (brand VARCHAR(20), year YEAR, colour VARCHAR(20))";
     con.query(Cars, function(err, result) {
         if (err) throw err;
         console.log("Cars Table created!!!");
@@ -27,12 +27,12 @@ con.connect(function(err) {
 });
 
 //save function to see our cars dummy data in the mysql terminal (insert data in the columns) so we can deal directly with the database
-for (var i = 0; i < data.length; i++) {
-    var inserting = `REPLACE INTO cars (brand, year, price, colour, description, image,id) VALUES (?, ?, ?, ?, ?, ?, ?) `;
-    let rows = [data[i].brand, data[i].year, data[i].price, data[i].colour, data[i].description, data[i].image, i + 1];
-    con.query(inserting, rows, function(err, results, fields) {
-        if (err) throw err;
-    });
-}
+// for (var i = 0; i < data.length; i++) {
+//     var inserting = `REPLACE INTO cars (brand, year, price, colour, description, image,id) VALUES (?, ?, ?, ?, ?, ?, ?) `;
+//     let rows = [data[i].brand, data[i].year, data[i].price, data[i].colour, data[i].description, data[i].image, i + 1];
+//     con.query(inserting, rows, function(err, results, fields) {
+//         if (err) throw err;
+//     });
+// }
 
 module.exports.con = con;

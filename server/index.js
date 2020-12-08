@@ -7,22 +7,24 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const bcrypt = require('bcrypt');
+// const { default: AddCar } = require("../src/components/AddCar.jsx");
+// const AddCar = require('../src/components/AddCar');
 
 app.use(express.json());
 app.use(cors());
-app.use(express.static(__dirname + '/../react-client/dist'));
+// app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 
 //Get request to render all cars in stock db table when opening the inventory page.
-app.get("/allcars", (req, res) => {
-    let query = `SELECT * FROM cars`
-    myDB.con.query(query, (err, results) => {
-        res.send(results)
-    })
-})
+// app.get("/allcars", (req, res) => {
+//     let query = `SELECT * FROM cars`
+//     myDB.con.query(query, (err, results) => {
+//         res.send(results)
+//     })
+// })
 
 const users = [];
 
@@ -159,8 +161,70 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/../react-client/dist/index.html'));
 });
 
+
+app.get(('/'), (req, res) => {
+    AddCar.find()    
+    // myDB.con.query(query, (err, results) => {
+    //     res.send(results)
+    // })
+    .then(carInfo => res.json(carInfo))
+    .catch(err => res.status(400).json('Error: '+ err));
+    console.log('=======');
+});
+
+app.post(('/add'),(req, res) => {
+    const brand = req.body.brand;
+    const year = req.body.year;
+    const colour = req.body.colour;
+    // const price = req.body.price;
+    // const description=req.body.description;
+    myDB.con.query(`Insert into cars (brand, year, colour) VALUES ('${brand}','${year}','${colour}')`), (err, result) => {
+        if (err)
+            throw err;
+    }
+    console.log('++++++')
+    // const newCar = new carInfo ({
+    //   brand,
+    //   year,
+    //   colour
+    // //   price,
+    // //   description
+    // });
+    
+    // newCar.save()
+    .then(() => res.json("Car Added!"))
+    .catch(err => res.status(400).json("Error: " + err));
+  });
+
+
+//Get request to render all cars in stock db table when opening the inventory page.
+// app.get("/allcars", (req, res) => {
+//     let query = `SELECT * FROM car`
+//     myDB.con.query(query, (err, results) => {
+//         res.send(results)
+//     })
+// })
+
+
+
+//save data from signup page to users table in mysql
+app.post('/signup', (req, res) => {
+    let firstName = req.body.firstName;
+    let lastName = req.body.lastName
+    let username = req.body.username
+    let email = req.body.email
+    let password = req.body.password
+
+    myDB.con.query(`Insert into users (firstName, lastName, username, email, password) VALUES ('${firstName}','${lastName}','${username}','${email}','${password}')`), (err, result) => {
+        if (err)
+            throw err;
+    }
+    res.send();
+})
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`)
 });
+
 
